@@ -16,10 +16,8 @@ public class PathResolverTestController {
     public void test2(){
     }
 
-
     @Path(":controller/dynamic/")
     public void test3(){
     }
-
 
 }

@@ -6,7 +6,7 @@ import java.lang.reflect.Method;
 
 /**
  * Manage URl path.
- *
+ * <p>
  * Created by Gustavo on 26/04/2016.
  */
 public class PathResolver {
@@ -17,7 +17,7 @@ public class PathResolver {
      * Generate URl path.
      *
      * @param controller Controller class
-     * @param method     Controller method
+     * @param method Controller method
      * @return Http path
      */
     public String resolvePath(Class<?> controller, Method method) {

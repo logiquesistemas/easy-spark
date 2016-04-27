@@ -5,7 +5,7 @@ import spark.Request;
 import spark.Response;
 
 /**
- * Controller to test if controller method arguments works fine.
+ * Controller to test if br.com.logique.controller method arguments works fine.
  * 
  * Created by Gustavo on 26/04/2016.
  */

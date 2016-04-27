@@ -10,7 +10,7 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;
 
 /**
- * Manage the controller method execution.
+ * Manage the br.com.logique.controller method execution.
  * <p>
  * Created by gustavo on 26/04/2016.
  */
@@ -27,17 +27,17 @@ public class InvocationHandle {
     }
 
     /**
-     * Invoke controller method by reflection.
+     * Invoke br.com.logique.controller method by reflection.
      *
      * @param request  Http Spark request
      * @param response Http spark response
-     * @return controller method return
+     * @return br.com.logique.controller method return
      */
     public Object execute(Request request, Response response) {
         try {
             return invoke(request, response);
         } catch (IllegalAccessException | InstantiationException | InvocationTargetException e) {
-            logger.error("Error during controller method invocation.", e);
+            logger.error("Error during br.com.logique.controller method invocation.", e);
         }
         return null;
     }
