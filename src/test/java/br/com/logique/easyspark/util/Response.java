@@ -1,4 +1,4 @@
-package br.com.logique.easyspark.sparkengine.util;
+package br.com.logique.easyspark.util;
 
 /**
  * DTO to save HTTP response.

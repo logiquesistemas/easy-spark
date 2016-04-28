@@ -1,6 +1,6 @@
-package br.com.logique.easyspark.sparkengine.it;
+package br.com.logique.easyspark.it;
 
-import br.com.logique.easyspark.sparkengine.annotations.Controller;
+import br.com.logique.easyspark.annotations.Controller;
 import spark.Request;
 import spark.Response;
 

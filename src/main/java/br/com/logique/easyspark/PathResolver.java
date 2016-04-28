@@ -1,6 +1,6 @@
-package br.com.logique.easyspark.sparkengine;
+package br.com.logique.easyspark;
 
-import br.com.logique.easyspark.sparkengine.annotations.Path;
+import br.com.logique.easyspark.annotations.Path;
 
 import java.lang.reflect.Method;
 

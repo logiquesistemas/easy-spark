@@ -1,19 +1,19 @@
-package br.com.logique.easyspark.sparkengine.it;
+package br.com.logique.easyspark.it;
 
-import br.com.logique.easyspark.sparkengine.util.HttpRequest;
-import br.com.logique.easyspark.sparkengine.util.Response;
+import br.com.logique.easyspark.util.HttpRequest;
+import br.com.logique.easyspark.util.Response;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import java.io.IOException;
 import java.util.concurrent.ExecutionException;
 
 /**
- * Test if controllers methods arguments works fine.
- *
+ * Test all HTTP verbs.
  * Created by Gustavo on 26/04/2016.
  */
-public class SparkArgumentsIT {
+public class HttpVerbsIT {
 
     public static String BASE_PATH;
 
@@ -23,30 +23,30 @@ public class SparkArgumentsIT {
     }
 
     @Test
-    public void testeNoArguments() throws Exception {
+    public void testGet() throws IOException {
         HttpRequest httpRequest = new HttpRequest();
-        Response result = httpRequest.sendGet(BASE_PATH + "/argument/noarguments/");
+        Response result = httpRequest.sendGet(BASE_PATH + "/httpverbs/");
         Assert.assertEquals("true", result.getResponseMsg());
     }
 
     @Test
-    public void testeRequest() throws Exception {
+    public void testPost() throws IOException {
         HttpRequest httpRequest = new HttpRequest();
-        Response result = httpRequest.sendGet(BASE_PATH + "/argument/request/");
+        Response result = httpRequest.sendRequest(BASE_PATH + "/httpverbs/", "POST");
         Assert.assertEquals("true", result.getResponseMsg());
     }
 
     @Test
-    public void testeResponse() throws Exception {
+    public void testPut() throws IOException {
         HttpRequest httpRequest = new HttpRequest();
-        Response result = httpRequest.sendGet(BASE_PATH + "/argument/response/");
+        Response result = httpRequest.sendRequest(BASE_PATH + "/httpverbs/", "PUT");
         Assert.assertEquals("true", result.getResponseMsg());
     }
 
     @Test
-    public void testeRequestResponse() throws Exception {
+    public void testDelete() throws IOException {
         HttpRequest httpRequest = new HttpRequest();
-        Response result = httpRequest.sendGet(BASE_PATH + "/argument/requestresponse/");
+        Response result = httpRequest.sendRequest(BASE_PATH + "/httpverbs/", "DELETE");
         Assert.assertEquals("true", result.getResponseMsg());
     }
 

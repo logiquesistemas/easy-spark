@@ -1,7 +1,7 @@
-package br.com.logique.easyspark.sparkengine.it;
+package br.com.logique.easyspark.it;
 
-import br.com.logique.easyspark.sparkengine.annotations.Controller;
-import br.com.logique.easyspark.sparkengine.annotations.Path;
+import br.com.logique.easyspark.annotations.Controller;
+import br.com.logique.easyspark.annotations.Path;
 
 /**
  * Controller to test @Path annotation.

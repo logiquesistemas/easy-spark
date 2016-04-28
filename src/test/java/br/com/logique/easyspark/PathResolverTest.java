@@ -1,11 +1,9 @@
-package br.com.logique.easyspark.sparkengine;
+package br.com.logique.easyspark;
 
 import org.junit.Assert;
 import org.junit.Test;
 
 import java.lang.reflect.Method;
-
-import static org.junit.Assert.*;
 
 /**
  * PathResolver unit test.

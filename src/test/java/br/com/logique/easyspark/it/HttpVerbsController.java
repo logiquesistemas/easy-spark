@@ -1,6 +1,6 @@
-package br.com.logique.easyspark.sparkengine.it;
+package br.com.logique.easyspark.it;
 
-import br.com.logique.easyspark.sparkengine.annotations.*;
+import br.com.logique.easyspark.annotations.*;
 
 /**
  * Controller to teste if HTTP verbs works fine.

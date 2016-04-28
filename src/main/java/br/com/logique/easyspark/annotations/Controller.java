@@ -1,4 +1,4 @@
-package br.com.logique.easyspark.sparkengine.annotations;
+package br.com.logique.easyspark.annotations;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

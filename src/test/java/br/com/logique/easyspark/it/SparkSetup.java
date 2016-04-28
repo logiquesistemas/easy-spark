@@ -1,6 +1,6 @@
-package br.com.logique.easyspark.sparkengine.it;
+package br.com.logique.easyspark.it;
 
-import br.com.logique.easyspark.sparkengine.SparkEngine;
+import br.com.logique.easyspark.SparkEngine;
 
 /**
  * Setup spark to Integration tests.

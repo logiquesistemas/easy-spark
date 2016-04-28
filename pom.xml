@@ -53,6 +53,13 @@
             <scope>test</scope>
         </dependency>
 
+        <!--Object Instantiation-->
+        <dependency>
+            <groupId>br.com.caelum</groupId>
+            <artifactId>iogi</artifactId>
+            <version>1.0.1</version>
+        </dependency>
+
 
     </dependencies>
 

@@ -1,4 +1,4 @@
-package br.com.logique.easyspark.sparkengine.util;
+package br.com.logique.easyspark.util;
 
 import java.io.BufferedReader;
 import java.io.IOException;

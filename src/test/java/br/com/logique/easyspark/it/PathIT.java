@@ -1,7 +1,7 @@
-package br.com.logique.easyspark.sparkengine.it;
+package br.com.logique.easyspark.it;
 
-import br.com.logique.easyspark.sparkengine.util.HttpRequest;
-import br.com.logique.easyspark.sparkengine.util.Response;
+import br.com.logique.easyspark.util.HttpRequest;
+import br.com.logique.easyspark.util.Response;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;

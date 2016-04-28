@@ -1,7 +1,7 @@
-package br.com.logique.easyspark.sparkengine;
+package br.com.logique.easyspark;
 
-import br.com.logique.easyspark.sparkengine.annotations.Controller;
-import br.com.logique.easyspark.sparkengine.annotations.Path;
+import br.com.logique.easyspark.annotations.Controller;
+import br.com.logique.easyspark.annotations.Path;
 
 /**
  * Created by gustavo on 27/04/2016.

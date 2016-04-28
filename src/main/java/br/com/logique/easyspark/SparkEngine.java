@@ -1,9 +1,9 @@
-package br.com.logique.easyspark.sparkengine;
+package br.com.logique.easyspark;
 
-import br.com.logique.easyspark.sparkengine.annotations.Controller;
-import br.com.logique.easyspark.sparkengine.annotations.Delete;
-import br.com.logique.easyspark.sparkengine.annotations.Post;
-import br.com.logique.easyspark.sparkengine.annotations.Put;
+import br.com.logique.easyspark.annotations.Controller;
+import br.com.logique.easyspark.annotations.Delete;
+import br.com.logique.easyspark.annotations.Post;
+import br.com.logique.easyspark.annotations.Put;
 import freemarker.cache.ClassTemplateLoader;
 import freemarker.template.Configuration;
 import org.reflections.Reflections;
