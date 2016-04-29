@@ -77,8 +77,8 @@ public class SparkEngine {
     }
 
     private void registerSparkRoute(Class<?> controller, Method method) {
-        PathResolver pathResolver = new PathResolver();
-        String path = pathResolver.resolvePath(controller, method);
+        PathResolver defaultPathResolver = new DefaultPathResolver();
+        String path = defaultPathResolver.resolvePath(controller, method);
         if (method.isAnnotationPresent(Post.class)) {
             logger.info("Registering a POST path {} --> {}::{}", path, controller.getSimpleName(), method.getName());
             Spark.post(path, (request, response) -> new InvocationHandle(controller, method).execute(request, response));

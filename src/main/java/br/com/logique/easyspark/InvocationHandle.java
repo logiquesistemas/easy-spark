@@ -43,7 +43,7 @@ public class InvocationHandle {
     }
 
     private Object invoke(Request request, Response response) throws IllegalAccessException, InvocationTargetException, InstantiationException {
-        Object[] parameters = getParamters(method.getParameters(), request, response);
+        Object[] parameters = getParamters(method, request, response);
         Object result;
         if (parameters != null) {
             result = method.invoke(getInstance(controller), parameters);
@@ -53,7 +53,9 @@ public class InvocationHandle {
         return result;
     }
 
-    private Object[] getParamters(Parameter[] parameters, Request request, Response response) {
+    private Object[] getParamters(Method method, Request request, Response response) {
+        ObjectInstantiator iogiObjectInstantiator = new IogiObjectInstantiator();
+        Parameter[] parameters = method.getParameters();
         Object[] params = null;
         if (parameters.length > 0) {
             params = new Object[parameters.length];
@@ -61,14 +63,22 @@ public class InvocationHandle {
             for (Parameter parameter : parameters) {
                 if (parameter.getType().isAssignableFrom(request.getClass())) {
                     params[index++] = request;
-                }
-                if (parameter.getType().isAssignableFrom(response.getClass())) {
+                }else if  (parameter.getType().isAssignableFrom(response.getClass())) {
                     params[index++] = response;
+                }else{
+                    params[index++] = iogiObjectInstantiator.resolveParameter(method, parameter, request);
                 }
             }
             return params;
         }
         return params;
+    }
+
+    private Object tryToResolveParameter(Method method, Parameter parameter, Request request) {
+
+        //parameter.getName()
+
+        return null;
     }
 
     private Object getInstance(Class<?> controller) throws IllegalAccessException, InstantiationException {
