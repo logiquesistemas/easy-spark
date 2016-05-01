@@ -72,6 +72,15 @@
             <version>2.8</version>
         </dependency>
 
+        <!--Apache commons-->
+
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.3.2</version>
+            <scope>test</scope>
+        </dependency>
+
     </dependencies>
 
     <build>
@@ -92,6 +101,32 @@
                 <configuration>
                     <encoding>UTF-8</encoding>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <excludes>
+                        <exclude>**/*IT.java</exclude>
+                    </excludes>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>integration-test</id>
+                        <goals>
+                            <goal>test</goal>
+                        </goals>
+                        <phase>integration-test</phase>
+                        <configuration>
+                            <excludes>
+                                <exclude>none</exclude>
+                            </excludes>
+                            <includes>
+                                <include>**/*IT.java</include>
+                            </includes>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
 
