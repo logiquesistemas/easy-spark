@@ -1,4 +1,4 @@
-package br.com.logique.easyspark;
+package br.com.logique.easyspark.core;
 
 import br.com.logique.easyspark.annotations.Path;
 
@@ -9,7 +9,7 @@ import java.lang.reflect.Method;
  * <p>
  * Created by Gustavo on 26/04/2016.
  */
-public class DefaultPathResolver implements PathResolver{
+public class DefaultPathResolver implements PathResolver {
 
     private static final String CONTROLLER = "Controller";
 

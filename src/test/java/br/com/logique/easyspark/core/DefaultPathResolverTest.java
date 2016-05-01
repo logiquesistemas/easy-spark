@@ -1,4 +1,4 @@
-package br.com.logique.easyspark;
+package br.com.logique.easyspark.core;
 
 import org.junit.Assert;
 import org.junit.Test;

@@ -1,4 +1,4 @@
-package br.com.logique.easyspark;
+package br.com.logique.easyspark.util;
 
 import java.util.concurrent.atomic.AtomicInteger;
 

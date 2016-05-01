@@ -1,4 +1,4 @@
-package br.com.logique.easyspark;
+package br.com.logique.easyspark.core;
 
 /**
  * Created by gustavo on 30/04/2016.

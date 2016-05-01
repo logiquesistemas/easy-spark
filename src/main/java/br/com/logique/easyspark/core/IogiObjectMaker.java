@@ -1,4 +1,4 @@
-package br.com.logique.easyspark;
+package br.com.logique.easyspark.core;
 
 import br.com.caelum.iogi.Iogi;
 import br.com.caelum.iogi.reflection.Target;

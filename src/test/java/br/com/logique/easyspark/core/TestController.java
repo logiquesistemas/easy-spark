@@ -1,5 +1,6 @@
-package br.com.logique.easyspark;
+package br.com.logique.easyspark.core;
 
+import br.com.logique.easyspark.util.InteractionsCounter;
 import br.com.logique.easyspark.annotations.Controller;
 import spark.Request;
 import spark.Response;
