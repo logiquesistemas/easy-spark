@@ -8,8 +8,8 @@ import java.lang.reflect.Parameter;
 /**
  * Created by gustavo on 28/04/2016.
  */
-public interface ObjectInstantiator {
+public interface ObjectMaker {
 
-    Object resolveParameter(Method method, Parameter parameter, Request request);
+    Object resolveParameter(String paramName, Parameter parameter, Request request);
 
 }

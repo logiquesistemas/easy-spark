@@ -18,12 +18,20 @@ public class InvocationHandle {
 
     private static Logger logger = LoggerFactory.getLogger(InvocationHandle.class);
 
+    private ObjectMaker iogiObjectMaker = new IogiObjectMaker();
+
+    private ParamNamesResolver paramNamesResolver = new DefaultParamNamesResolver();
+
     private Class<?> controller;
     private Method method;
 
     public InvocationHandle(Class<?> controller, Method method) {
         this.controller = controller;
         this.method = method;
+    }
+
+    public void setParamNamesResolver(ParamNamesResolver paramNamesResolver) {
+        this.paramNamesResolver = paramNamesResolver;
     }
 
     /**
@@ -54,31 +62,27 @@ public class InvocationHandle {
     }
 
     private Object[] getParamters(Method method, Request request, Response response) {
-        ObjectInstantiator iogiObjectInstantiator = new IogiObjectInstantiator();
+
+        String[] paramNames = paramNamesResolver.paramNames(method);
         Parameter[] parameters = method.getParameters();
+
         Object[] params = null;
         if (parameters.length > 0) {
             params = new Object[parameters.length];
             int index = 0;
             for (Parameter parameter : parameters) {
                 if (parameter.getType().isAssignableFrom(request.getClass())) {
-                    params[index++] = request;
+                    params[index] = request;
                 }else if  (parameter.getType().isAssignableFrom(response.getClass())) {
-                    params[index++] = response;
+                    params[index] = response;
                 }else{
-                    params[index++] = iogiObjectInstantiator.resolveParameter(method, parameter, request);
+                    params[index] = iogiObjectMaker.resolveParameter(paramNames[index], parameter, request);
                 }
+                index++;
             }
             return params;
         }
         return params;
-    }
-
-    private Object tryToResolveParameter(Method method, Parameter parameter, Request request) {
-
-        //parameter.getName()
-
-        return null;
     }
 
     private Object getInstance(Class<?> controller) throws IllegalAccessException, InstantiationException {
