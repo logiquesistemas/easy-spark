@@ -1,5 +1,6 @@
 package br.com.logique.easyspark.core;
 
+import br.com.logique.easyspark.annotations.Path;
 import br.com.logique.easyspark.util.InteractionsCounter;
 import br.com.logique.easyspark.annotations.Controller;
 import spark.Request;
@@ -31,6 +32,27 @@ public class TestController {
     }
 
     public String testIogi(Request request, Response response, IogiParameterTest iogiTest){
+        interactionsCounter.interact();
+        return UUID.randomUUID().toString();
+    }
+
+    public String testPrimitiveStr(String paramStr){
+        interactionsCounter.interact();
+        return UUID.randomUUID().toString();
+    }
+
+    public String testPrimitiveInt(int paramInt){
+        interactionsCounter.interact();
+        return UUID.randomUUID().toString();
+    }
+
+    public String testPrimitiveDbl(double paramDbl){
+        interactionsCounter.interact();
+        return UUID.randomUUID().toString();
+    }
+
+    @Path("testdynami/:paramStr/:paramInt")
+    public String testDynamic(Request request, String paramStr, Response response, Integer paramInt){
         interactionsCounter.interact();
         return UUID.randomUUID().toString();
     }

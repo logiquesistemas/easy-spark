@@ -29,7 +29,7 @@ public class DefaultPathResolver implements PathResolver {
             path = method.getAnnotation(Path.class).value();
             path = path.replaceAll(":controller", className);
         } else {
-            path = className + "/" + method.getName() + "/";
+            path = className + "/" + method.getName();
         }
 
         return path.toLowerCase();

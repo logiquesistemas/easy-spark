@@ -19,14 +19,22 @@ public class IogiObjectMaker implements ObjectMaker {
     public Object resolveParameter(String paramName, Parameter parameter, Request request) {
 
         Class<?> clazzParamter = parameter.getType();
-        Target<?> target = Target.create(clazzParamter, paramName);
+
+        String lowerCaseParamName = paramName.toLowerCase();
+
+        Target<?> target = Target.create(clazzParamter, lowerCaseParamName);
 
         List<br.com.caelum.iogi.parameters.Parameter> paramtersIogi = new ArrayList<>();
-        request.attributes().stream().filter(p -> p.startsWith(paramName))
-                .forEach(p -> paramtersIogi.add(new br.com.caelum.iogi.parameters.Parameter(p, request.attribute(p))));
+        request.attributes().stream().filter(p -> removeTwoPoints(p.toLowerCase()).startsWith(lowerCaseParamName))
+                .forEach(p -> paramtersIogi.add(new br.com.caelum.iogi.parameters.Parameter(removeTwoPoints(p.toLowerCase()), request.attribute(p).toString())));
+
+        request.queryParams().stream().filter(p -> removeTwoPoints(p.toLowerCase()).toLowerCase().startsWith(lowerCaseParamName))
+                .forEach(p -> paramtersIogi.add(new br.com.caelum.iogi.parameters.Parameter(removeTwoPoints(p.toLowerCase()), request.queryParams(p).toString())));
+
+        request.params().keySet().stream().filter(p -> removeTwoPoints(p).toLowerCase().startsWith(lowerCaseParamName))
+                .forEach(p -> paramtersIogi.add(new br.com.caelum.iogi.parameters.Parameter(removeTwoPoints(p.toLowerCase()), request.params(p).toString())));
 
         Iogi iogi = new Iogi(new NullDependencyProvider(), new DefaultLocaleProvider());
-
 
         Object result = iogi.instantiate(target, paramtersIogi.toArray(new br.com.caelum.iogi.parameters.Parameter[paramtersIogi.size()]));
         if (result == null) {
@@ -34,4 +42,11 @@ public class IogiObjectMaker implements ObjectMaker {
         }
         return result;
     }
+
+
+
+    private String removeTwoPoints(String input) {
+        return input.replaceAll(":", "");
+    }
+
 }

@@ -1,6 +1,7 @@
 package br.com.logique.easyspark.it;
 
 import br.com.logique.easyspark.annotations.Controller;
+import br.com.logique.easyspark.annotations.Path;
 import spark.Request;
 import spark.Response;
 
@@ -28,5 +29,13 @@ public class ArgumentController {
         return request != null && response != null;
     }
 
+    public Boolean requestStringQueryPrm(String paramStr){
+        return paramStr != null && !paramStr.isEmpty();
+    }
+
+    @Path("argument/requeststringprm/:paramStr")
+    public Boolean requestStringPrm(String paramStr){
+        return paramStr != null && !paramStr.isEmpty();
+    }
 
 }

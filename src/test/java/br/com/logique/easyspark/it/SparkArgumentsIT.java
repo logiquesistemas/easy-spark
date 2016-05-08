@@ -25,28 +25,42 @@ public class SparkArgumentsIT {
     @Test
     public void testeNoArguments() throws Exception {
         HttpRequest httpRequest = new HttpRequest();
-        Response result = httpRequest.sendGet(BASE_PATH + "/argument/noarguments/");
+        Response result = httpRequest.sendGet(BASE_PATH + "/argument/noarguments");
         Assert.assertEquals("true", result.getResponseMsg());
     }
 
     @Test
     public void testeRequest() throws Exception {
         HttpRequest httpRequest = new HttpRequest();
-        Response result = httpRequest.sendGet(BASE_PATH + "/argument/request/");
+        Response result = httpRequest.sendGet(BASE_PATH + "/argument/request");
         Assert.assertEquals("true", result.getResponseMsg());
     }
 
     @Test
     public void testeResponse() throws Exception {
         HttpRequest httpRequest = new HttpRequest();
-        Response result = httpRequest.sendGet(BASE_PATH + "/argument/response/");
+        Response result = httpRequest.sendGet(BASE_PATH + "/argument/response");
         Assert.assertEquals("true", result.getResponseMsg());
     }
 
     @Test
     public void testeRequestResponse() throws Exception {
         HttpRequest httpRequest = new HttpRequest();
-        Response result = httpRequest.sendGet(BASE_PATH + "/argument/requestresponse/");
+        Response result = httpRequest.sendGet(BASE_PATH + "/argument/requestresponse");
+        Assert.assertEquals("true", result.getResponseMsg());
+    }
+
+    @Test
+    public void testeRequestStringQueryPrm() throws Exception {
+        HttpRequest httpRequest = new HttpRequest();
+        Response result = httpRequest.sendGet(BASE_PATH + "/argument/requeststringqueryprm?paramStr=Logique");
+        Assert.assertEquals("true", result.getResponseMsg());
+    }
+
+    @Test
+    public void testeRequestStringPrm() throws Exception {
+        HttpRequest httpRequest = new HttpRequest();
+        Response result = httpRequest.sendGet(BASE_PATH + "/argument/requeststringprm/Logique");
         Assert.assertEquals("true", result.getResponseMsg());
     }
 
