@@ -4,7 +4,7 @@ EasySpark is a simple and lightweight Java web framework built for rapid develop
 
 ##Quick Start
 
-Fist of all create a simple java class with @Controller annotation.
+First of all create a simple java class with @Controller annotation.
 
 ```java
 package br.com.logique;
@@ -22,7 +22,7 @@ public class SimpleController {
 
 ```
 
-In your main class start a EasySpark calling the setUp method. It is necessary to inform base package where the engine will look for controllers.
+In your main class start a EasySpark calling the setUp method. It is necessary to inform the base package where the engine will look for controllers.
 
 ```java
 import br.com.logique.easyspark.SparkEngine;
@@ -39,6 +39,6 @@ public class App {
 }
 ```
 
+Now you can access the web page below and see the results
 
-##Getting Start
-Comming soon...
+http://localhost:4567/simple/hello
