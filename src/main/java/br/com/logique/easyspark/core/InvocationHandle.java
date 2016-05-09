@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import spark.Request;
 import spark.Response;
+import spark.Spark;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -46,6 +47,7 @@ public class InvocationHandle {
             return invoke(request, response);
         } catch (IllegalAccessException | InstantiationException | InvocationTargetException e) {
             logger.error("Error during br.com.logique.controller method invocation.", e);
+            Spark.halt(500, e.getMessage());
         }
         return null;
     }
