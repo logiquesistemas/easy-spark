@@ -128,21 +128,25 @@ To do RESTful web service with EasySpark you just need to put @Get, @Post, @Dele
 public class SimpleController {
 
     @Get
+    @Path("hello/")
     public String helloGet() {
         return "Hello World";;
     }
 
     @Post
+    @Path("hello/")
     public String helloPost() {
         return "Hello World";;
     }
 
     @Put
+    @Path("hello/")
     public String helloPut() {
         return "Hello World";;
     }
 
     @Delete
+    @Path("hello/")
     public String helloDelete() {
         return "Hello World";;
     }
@@ -150,3 +154,5 @@ public class SimpleController {
 }
 
 ```
+
+All the paths are the same. So, the Http verb will solve the route conflict.
