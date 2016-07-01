@@ -1,6 +1,5 @@
 package br.com.logique.easyspark.core;
 
-import br.com.logique.easyspark.core.ParamNamesResolver;
 import com.thoughtworks.paranamer.AnnotationParanamer;
 import com.thoughtworks.paranamer.BytecodeReadingParanamer;
 import com.thoughtworks.paranamer.CachingParanamer;

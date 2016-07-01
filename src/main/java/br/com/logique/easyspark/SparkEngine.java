@@ -12,7 +12,7 @@ import freemarker.template.Configuration;
 import org.reflections.Reflections;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import spark.Spark;
+import spark.*;
 import spark.template.freemarker.FreeMarkerEngine;
 
 import java.lang.reflect.Method;
@@ -22,24 +22,19 @@ import static spark.Spark.staticFileLocation;
 
 /**
  * Manage Spark framework.
- *
+ * <p>
  * Created by gustavo on 26/04/2016.
  */
 public class SparkEngine {
 
     private static Logger logger = LoggerFactory.getLogger(SparkEngine.class);
-
+    public String staticFileLocation;
+    public String templateLocation;
     private String basePackage;
-
     private int port;
-
     private String defaultEncoding;
 
-    public String staticFileLocation;
-
-    public String templateLocation;
-
-    private SparkEngine(int port, String defaultEncoding, String staticFileLocation, String templateLocation, String basePackage) {
+    public SparkEngine(int port, String defaultEncoding, String staticFileLocation, String templateLocation, String basePackage) {
         this.port = port;
         this.defaultEncoding = defaultEncoding;
         this.staticFileLocation = staticFileLocation;
@@ -59,55 +54,74 @@ public class SparkEngine {
         freeMarkerEngine.setConfiguration(freeMarkerConfiguration);
         staticFileLocation(staticFileLocation);
         Spark.port(port);
-        addRoutes();
+        addRoutes(freeMarkerEngine);
         Spark.init();
         Spark.awaitInitialization();
     }
 
-    private void addRoutes() {
+    private void addRoutes(TemplateEngine freeMarkerEngine) {
         Reflections reflections = new Reflections(basePackage);
         Set<Class<?>> controllers = reflections.getTypesAnnotatedWith(Controller.class);
         for (Class<?> controller : controllers) {
-            registerController(controller);
+            registerController(controller, freeMarkerEngine);
         }
     }
 
-    private void registerController(Class<?> controller) {
+    private void registerController(Class<?> controller, TemplateEngine freeMarkerEngine) {
         Method[] methods = controller.getDeclaredMethods();
         for (Method method : methods) {
-            registerSparkRoute(controller, method);
+            registerSparkRoute(controller, method, freeMarkerEngine);
         }
     }
 
-    private void registerSparkRoute(Class<?> controller, Method method) {
+    private void registerSparkRoute(Class<?> controller, Method method, TemplateEngine freeMarkerEngine) {
         PathResolver defaultPathResolver = new DefaultPathResolver();
         String path = defaultPathResolver.resolvePath(controller, method);
+
+        boolean isModelAndView = method.getReturnType().isAssignableFrom(ModelAndView.class);
+
+        Route route = (request, response) -> new InvocationHandle(controller, method).execute(request, response);
+        TemplateViewRoute templateViewRoute = (request, response) -> new InvocationHandle(controller, method).executeModelAndView(request, response);
+
         if (method.isAnnotationPresent(Post.class)) {
             logger.info("Registering a POST path {} --> {}::{}", path, controller.getSimpleName(), method.getName());
-            Spark.post(path, (request, response) -> new InvocationHandle(controller, method).execute(request, response));
+            if (isModelAndView) {
+                Spark.post(path, templateViewRoute, freeMarkerEngine);
+            } else {
+                Spark.post(path, route);
+            }
         } else if (method.isAnnotationPresent(Delete.class)) {
             logger.info("Registering a DELETE path {} --> {}::{}", path, controller.getSimpleName(), method.getName());
-            Spark.delete(path, (request, response) -> new InvocationHandle(controller, method).execute(request, response));
+            if (isModelAndView) {
+                Spark.delete(path, templateViewRoute, freeMarkerEngine);
+            } else {
+                Spark.delete(path, route);
+            }
         } else if (method.isAnnotationPresent(Put.class)) {
             logger.info("Registering a PUT path {} --> {}::{}", path, controller.getSimpleName(), method.getName());
-            Spark.put(path, (request, response) -> new InvocationHandle(controller, method).execute(request, response));
+            if (isModelAndView) {
+                Spark.put(path, templateViewRoute, freeMarkerEngine);
+            } else {
+                Spark.put(path, route);
+            }
         } else {
             logger.info("Registering a GET path {} --> {}::{}", path, controller.getSimpleName(), method.getName());
-            Spark.get(path, (request, response) -> new InvocationHandle(controller, method).execute(request, response));
+            if (isModelAndView) {
+                Spark.get(path, templateViewRoute, freeMarkerEngine);
+            } else {
+                Spark.get(path, route);
+            }
         }
     }
+
 
     public static class Builder {
 
-        private int port = 4567;
-
-        private String defaultEncoding = "UTF-8";
-
         public String staticFileLocation = "/public";
-
         public String templateLocation = "/public/templates";
-
         public String basePackage = "br.com";
+        private int port = 4567;
+        private String defaultEncoding = "UTF-8";
 
         public Builder withPort(int port) {
             this.port = port;

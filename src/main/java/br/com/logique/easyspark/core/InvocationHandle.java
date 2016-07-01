@@ -2,6 +2,7 @@ package br.com.logique.easyspark.core;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
 import spark.Spark;
@@ -36,11 +37,22 @@ public class InvocationHandle {
     }
 
     /**
-     * Invoke br.com.logique.controller method by reflection.
+     * Invoke controller method by reflection.
      *
      * @param request  Http Spark request
      * @param response Http spark response
-     * @return br.com.logique.controller method return
+     * @return ModelAndView instance
+     */
+    public ModelAndView executeModelAndView(Request request, Response response) {
+        return (ModelAndView) execute(request, response);
+    }
+
+    /**
+     * Invoke controller method by reflection.
+     *
+     * @param request  Http Spark request
+     * @param response Http spark response
+     * @return method return
      */
     public Object execute(Request request, Response response) {
         try {
@@ -75,9 +87,9 @@ public class InvocationHandle {
             for (Parameter parameter : parameters) {
                 if (parameter.getType().isAssignableFrom(request.getClass())) {
                     params[index] = request;
-                }else if  (parameter.getType().isAssignableFrom(response.getClass())) {
+                } else if (parameter.getType().isAssignableFrom(response.getClass())) {
                     params[index] = response;
-                }else{
+                } else {
                     params[index] = iogiObjectMaker.resolveParameter(paramNames[index], parameter, request);
                 }
                 index++;

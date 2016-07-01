@@ -2,7 +2,6 @@ package br.com.logique.easyspark.core;
 
 import spark.Request;
 
-import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;
 
 /**

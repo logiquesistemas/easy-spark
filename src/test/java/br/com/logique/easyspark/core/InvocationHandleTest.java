@@ -115,6 +115,16 @@ public class InvocationHandleTest {
         Assert.assertTrue(TestController.isInteracted());
     }
 
+    @Test
+    public void invokeModelAndView() throws NoSuchMethodException {
+        Response mockResponse = mock(Response.class);
+        Request mockRequest = mock(Request.class);
+        Method controllerMethod = TestController.class.getMethod("testModelViewReturn");
+        ParamNamesResolver paramNames = mock(ParamNamesResolver.class);
+        executeMethod(paramNames, mockResponse, mockRequest, controllerMethod);
+        Assert.assertTrue(TestController.isInteracted());
+    }
+
     private void executeMethod(ParamNamesResolver paramNames, Response mockResponse, Request mockRequest, Method controllerMethod) {
         InvocationHandle invocationHandle = new InvocationHandle(TestController.class, controllerMethod);
         invocationHandle.setParamNamesResolver(paramNames);
