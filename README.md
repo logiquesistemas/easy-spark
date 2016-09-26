@@ -9,7 +9,7 @@ First of all create a simple java class with @Controller annotation.
 ```java
 package br.com.logique;
 
-import br.com.logique.easyspark.annotations.Controller;
+import Controller;
 
 @Controller
 public class SimpleController {
@@ -24,7 +24,7 @@ public class SimpleController {
 In your main class start a EasySpark calling the setUp method. It is necessary to inform the base package where the engine will look for controllers.
 
 ```java
-import br.com.logique.easyspark.SparkEngine;
+import SparkEngine;
 
 public class App {
 
