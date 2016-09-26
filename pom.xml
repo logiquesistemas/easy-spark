@@ -16,6 +16,7 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.scm.id>github</project.scm.id>
     </properties>
 
     <url>https://github.com/logiquesistemas/easy-spark</url>
