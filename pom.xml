@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>br.com.logiquesistemas</groupId>
     <artifactId>easy-spark</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0.0-beta</version>
 
     <name>easy-spark</name>
     <description>EasySpark is a simple and lightweight Java web framework built for rapid development.
@@ -53,7 +51,7 @@
         <url>http://github.com/logiquesistemas/easy-spark</url>
         <connection>scm:git:git://github.com/logiquesistemas/easy-spark</connection>
         <developerConnection>scm:git:git@github.com:logiquesistemas/easy-spark.git</developerConnection>
-        <tag>HEAD</tag>
+        <tag>easy-spark-1.0.0-beta</tag>
     </scm>
 
     <dependencies>
