@@ -1,6 +1,18 @@
 # EasySpark
 
-EasySpark is a simple and lightweight Java web framework built for rapid development. EasySpart uses Spark Framework (http://sparkjava.com/) and add some facilities to organize your code in a MVC architecture.
+EasySpark is a simple and lightweight Java web framework built for quick development. EasySpark uses Spark Framework (http://sparkjava.com/) and add some facilities to organize your code in a MVC architecture.
+
+##Downloading
+
+For a quick start, you can use this snippet in your maven POM:
+
+```xml
+<dependency>
+    <groupId>br.com.logiquesistemas</groupId>
+    <artifactId>easy-spark</artifactId>
+    <version>1.0.0</version>
+</dependency>
+```
 
 ##Quick Start
 
@@ -30,13 +42,15 @@ public class App {
 
     public static void main(String[] args) {
         SparkEngine engine = new SparkEngine.Builder()
-                .withBasePackage("br.com.logique")
+                .withBasePackage("br.com.logiquesistemas")
+                .withPort(7485)
                 .build();
-        engine.setUp();
     }
 
 }
 ```
+
+The base package is the root package where EasySpark will look for controllers.
 
 Now you can access the web page below and see the results
 
