@@ -2,10 +2,7 @@ package br.com.logiquesistemas.easyspark.core;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import spark.ModelAndView;
-import spark.Request;
-import spark.Response;
-import spark.Spark;
+import spark.*;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -59,7 +56,12 @@ public class InvocationHandle {
             return invoke(request, response);
         } catch (IllegalAccessException | InstantiationException | InvocationTargetException e) {
             logger.error("Error during br.com.logique.controller method invocation.", e);
-            Spark.halt(500, e.getMessage());
+            if (e.getCause() instanceof HaltException) {
+                HaltException haltException = (HaltException) e.getCause();
+                Spark.halt(haltException.getStatusCode(), haltException.getBody());
+            } else {
+                Spark.halt(500, e.getMessage());
+            };
         }
         return null;
     }
