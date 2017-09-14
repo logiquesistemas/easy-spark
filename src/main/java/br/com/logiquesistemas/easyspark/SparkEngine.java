@@ -1,10 +1,8 @@
 package br.com.logiquesistemas.easyspark;
 
-import br.com.logiquesistemas.easyspark.annotations.Controller;
-import br.com.logiquesistemas.easyspark.annotations.Delete;
-import br.com.logiquesistemas.easyspark.annotations.Post;
-import br.com.logiquesistemas.easyspark.annotations.Put;
+import br.com.logiquesistemas.easyspark.annotations.*;
 import br.com.logiquesistemas.easyspark.core.DefaultPathResolver;
+import br.com.logiquesistemas.easyspark.core.Intercept;
 import br.com.logiquesistemas.easyspark.core.InvocationHandle;
 import br.com.logiquesistemas.easyspark.core.PathResolver;
 import freemarker.cache.ClassTemplateLoader;
@@ -33,6 +31,7 @@ public class SparkEngine {
     private String basePackage;
     private int port;
     private String defaultEncoding;
+    private Reflections reflections;
 
     public SparkEngine(int port, String defaultEncoding, String staticFileLocation, String templateLocation, String basePackage) {
         this.port = port;
@@ -46,6 +45,7 @@ public class SparkEngine {
      * Spark framework initialization.
      */
     public void setUp() {
+        reflections = new Reflections(basePackage);
         FreeMarkerEngine freeMarkerEngine = new FreeMarkerEngine();
         Configuration freeMarkerConfiguration = new Configuration(Configuration.getVersion());
         freeMarkerConfiguration.setOutputEncoding(defaultEncoding);
@@ -54,13 +54,59 @@ public class SparkEngine {
         freeMarkerEngine.setConfiguration(freeMarkerConfiguration);
         staticFileLocation(staticFileLocation);
         Spark.port(port);
+        setupInterceptors();
         addRoutes(freeMarkerEngine);
         Spark.init();
         Spark.awaitInitialization();
     }
 
+    private void setupInterceptors() {
+        setupBefore();
+        setupAfter();
+    }
+
+    private void setupBefore() {
+        Set<Class<?>> interceptors = reflections.getTypesAnnotatedWith(Before.class);
+        for (Class<?> interceptor : interceptors) {
+
+            if (validateInterceptor(interceptor)){
+                Before annotation = interceptor.getAnnotation(Before.class);
+                Filter filter = (request, response) -> new InvocationHandle(interceptor, interceptor.getDeclaredMethod("intercept", Request.class, Response.class))
+                        .execute(request, response);
+                Spark.before(annotation.filter(), filter);
+            }else{
+                logger.warn("Invalid Before!. The Inteceptor {} needs to implement Intercept interface. This interceptor will be ignored.", interceptor.getCanonicalName());
+            }
+        }
+    }
+
+    private void setupAfter() {
+        Set<Class<?>> interceptors = reflections.getTypesAnnotatedWith(After.class);
+        for (Class<?> interceptor : interceptors) {
+
+            if (validateInterceptor(interceptor)){
+                After annotation = interceptor.getAnnotation(After.class);
+                Filter filter = (request, response) -> new InvocationHandle(interceptor, interceptor.getDeclaredMethod("intercept", Request.class, Response.class))
+                        .execute(request, response);
+                Spark.after(annotation.filter(), filter);
+            }else{
+                logger.warn("Invalid Before!. The Inteceptor {} needs to implement Intercept interface. This interceptor will be ignored.", interceptor.getCanonicalName());
+            }
+        }
+    }
+
+    private boolean validateInterceptor(Class<?> interceptor)  {
+        try {
+            Class<?> clazz = null;
+            clazz = Class.forName(interceptor.getCanonicalName());
+            return Intercept.class.isAssignableFrom(clazz);
+        } catch (ClassNotFoundException e) {
+            return false;
+        }
+    }
+
     private void addRoutes(TemplateEngine freeMarkerEngine) {
-        Reflections reflections = new Reflections(basePackage);
+
         Set<Class<?>> controllers = reflections.getTypesAnnotatedWith(Controller.class);
         for (Class<?> controller : controllers) {
             registerController(controller, freeMarkerEngine);
@@ -117,9 +163,9 @@ public class SparkEngine {
 
     public static class Builder {
 
-        public String staticFileLocation = "/public";
-        public String templateLocation = "/public/templates";
-        public String basePackage = "br.com";
+        private String staticFileLocation = "/public";
+        private String templateLocation = "/public/templates";
+        private String basePackage = "br.com";
         private int port = 4567;
         private String defaultEncoding = "UTF-8";
 

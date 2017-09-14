@@ -45,6 +45,7 @@ public class App {
                 .withBasePackage("br.com.logiquesistemas")
                 .withPort(7485)
                 .build();
+        engine.setUp();
     }
 
 }
@@ -168,5 +169,4 @@ public class SimpleController {
 }
 
 ```
-
 All the paths are the same. So, the Http verb will solve the route conflict.

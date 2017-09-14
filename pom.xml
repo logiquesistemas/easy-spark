@@ -6,7 +6,7 @@
 
     <groupId>br.com.logiquesistemas</groupId>
     <artifactId>easy-spark</artifactId>
-    <version>1.0.0</version>
+    <version>1.1-SNAPSHOT</version>
 
     <name>easy-spark</name>
     <description>EasySpark is a simple and lightweight Java web framework built for rapid development.
@@ -83,7 +83,7 @@
             <version>2.3.23</version>
         </dependency>
 
-        <!--Processador de Anotações-->
+        <!--Annotation Processor-->
         <dependency>
             <groupId>org.reflections</groupId>
             <artifactId>reflections</artifactId>
@@ -238,6 +238,5 @@
             <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
         </repository>
     </distributionManagement>
-
 
 </project>
