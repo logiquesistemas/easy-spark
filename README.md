@@ -2,7 +2,7 @@
 
 EasySpark is a simple and lightweight Java web framework built for quick development. EasySpark uses Spark Framework (http://sparkjava.com/) and add some facilities to organize your code in a MVC architecture.
 
-##Downloading
+## Downloading
 
 For a quick start, you can use this snippet in your maven POM:
 
@@ -14,7 +14,7 @@ For a quick start, you can use this snippet in your maven POM:
 </dependency>
 ```
 
-##Quick Start
+## Quick Start
 
 First of all create a simple java class with @Controller annotation.
 
@@ -81,7 +81,24 @@ public class SimpleController {
 }
 
 ```
-Now the hello method will be invoked when you access http://localhost:4567/hello 
+Now the hello method will be invoked when you access *http://localhost:4567/hello*
+
+You can also define a global path for all methods inside a controller by using @Path globally
+
+```java
+@Controller
+@Path("custompath")
+public class SimpleController {
+
+    @Path("/hello")
+    public String hello(){
+        return "Hello World";
+    }
+    
+}
+```
+
+The hello method will now be invoked by the following url: *http://localhost:4567/custompath/hello*
 
 ## Receiving parameters
 
