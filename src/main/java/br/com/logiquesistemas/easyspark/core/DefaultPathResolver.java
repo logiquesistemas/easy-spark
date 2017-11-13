@@ -32,6 +32,10 @@ public class DefaultPathResolver implements PathResolver {
             path = className + "/" + method.getName();
         }
 
+        if (controller.isAnnotationPresent(Path.class)) {
+            path = controller.getAnnotation(Path.class).value() + "/" + path;
+        }
+
         return path.toLowerCase();
     }
 

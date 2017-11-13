@@ -9,6 +9,7 @@ import br.com.logiquesistemas.easyspark.annotations.Path;
  * Created by Gustavo on 26/04/2016.
  */
 @Controller
+@Path("globalpath")
 public class PathController {
 
     @Path("basic/")

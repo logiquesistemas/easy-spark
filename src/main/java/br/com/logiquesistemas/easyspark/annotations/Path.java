@@ -12,7 +12,7 @@ import java.lang.annotation.Target;
  * Created by Gustavo on 26/04/2016.
  */
 @Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.METHOD)
+@Target({ ElementType.METHOD, ElementType.TYPE })
 public @interface Path {
 
     String value();
