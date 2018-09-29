@@ -2,7 +2,7 @@
 
 EasySpark is a simple and lightweight Java web framework built for quick development. EasySpark uses Spark Framework (http://sparkjava.com/) and add some facilities to organize your code in a MVC architecture.
 
-##Downloading
+## Downloading
 
 For a quick start, you can use this snippet in your maven POM:
 
@@ -14,7 +14,7 @@ For a quick start, you can use this snippet in your maven POM:
 </dependency>
 ```
 
-##Quick Start
+## Quick Start
 
 First of all create a simple java class with @Controller annotation.
 
