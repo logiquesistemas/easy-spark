@@ -81,7 +81,24 @@ public class SimpleController {
 }
 
 ```
-Now the hello method will be invoked when you access http://localhost:4567/hello 
+Now the hello method will be invoked when you access *http://localhost:4567/hello*
+
+You can also define a global path for all methods inside a controller by using @Path globally
+
+```java
+@Controller
+@Path("custompath")
+public class SimpleController {
+
+    @Path("/hello")
+    public String hello(){
+        return "Hello World";
+    }
+    
+}
+```
+
+The hello method will now be invoked by the following url: *http://localhost:4567/custompath/hello*
 
 ## Receiving parameters
 

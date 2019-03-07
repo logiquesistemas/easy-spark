@@ -8,7 +8,7 @@ import java.lang.reflect.Method;
 public interface PathResolver {
 
     /**
-     * Generate URl path.
+     * Generate URL path.
      *
      * @param controller Controller class
      * @param method Controller method

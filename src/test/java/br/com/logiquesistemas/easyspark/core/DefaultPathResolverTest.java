@@ -1,5 +1,6 @@
 package br.com.logiquesistemas.easyspark.core;
 
+import br.com.logiquesistemas.easyspark.it.PathController;
 import org.junit.Assert;
 import org.junit.Test;
 import spark.Request;
@@ -45,6 +46,22 @@ public class DefaultPathResolverTest {
                 Integer.class, Request.class);
         String path = defaultPathResolver.resolvePath(PathResolverTestController.class, loginMethod);
         Assert.assertEquals("test4/:paramstr/:paramint", path);
+    }
+
+    @Test
+    public void testGlobalPathInController() throws Exception {
+        PathResolver defaultPathResolver = new DefaultPathResolver();
+        Method method = PathController.class.getMethod("basicPath");
+        String path = defaultPathResolver.resolvePath(PathController.class, method);
+        Assert.assertEquals("globalpath/basic/", path);
+    }
+
+    @Test
+    public void testGlobalPathWithControllerName() throws Exception {
+        PathResolver defaultPathResolver = new DefaultPathResolver();
+        Method method = PathController.class.getMethod("dynamicPath");
+        String path = defaultPathResolver.resolvePath(PathController.class, method);
+        Assert.assertEquals("globalpath/path/basic/", path);
     }
 
 }
